@@ -1,10 +1,10 @@
 import { Sequelize } from "sequelize";
-import { UserModel } from "./models";
 
 // // Option 3: Passing parameters separately (other dialects)
 const sequelize = new Sequelize("elastic", "postgres", "1230", {
   host: "localhost",
   dialect: "postgres",
+  logging: false,
 });
 
 // console.log("sequelize", sequelize);
@@ -13,12 +13,14 @@ function connectDB(params) {
   sequelize
     .sync({ alter: true })
     .then(() => {
-      console.log("Database synchronizing Connected.");
+      console.log("Database synchronizing connected.");
     })
     .catch((error) => {
       console.error("Error synchronizing models:", error);
     });
 }
+
+connectDB();
 
 // Test the connection
 async function testConnection() {
