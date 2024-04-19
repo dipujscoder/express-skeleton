@@ -5,6 +5,8 @@ import { UserModel } from "./models";
 const sequelize = new Sequelize("elastic", "postgres", "1230", {
   host: "localhost",
   dialect: "postgres",
+  logging: false,
+  // logging: (msg) => logger.debug(msg),
 });
 
 // console.log("sequelize", sequelize);
@@ -19,6 +21,8 @@ function connectDB(params) {
       console.error("Error synchronizing models:", error);
     });
 }
+
+connectDB();
 
 // Test the connection
 async function testConnection() {
