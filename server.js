@@ -20,3 +20,5 @@ app.use("/", UserRouter);
 app.listen(port, () => {
   console.log(`you server is running wiht ${port}`);
 });
+
+export default app;
