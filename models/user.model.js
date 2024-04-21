@@ -17,6 +17,7 @@ const User = sequelize.define(
   {
     tableName: "users",
     updatedAt: "update_at",
+    createdAt: "created_at",
     indexes: [
       // Create a unique index on email
 

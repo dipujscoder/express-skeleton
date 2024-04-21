@@ -8,8 +8,8 @@ router.get("/users", async (req, res) => {
   const _users = await UserModel.findAll();
   res.json(_users);
 });
+
 router.post("/users", async (req, res) => {
-  console.log("UserModel");
   const _users = await UserModel.create({
     firstName: "Aliul",
     lastName: "Islam",
