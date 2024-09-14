@@ -1,5 +1,4 @@
 import { Sequelize } from "sequelize";
-import { UserModel } from "./models";
 
 // // Option 3: Passing parameters separately (other dialects)
 const sequelize = new Sequelize("elastic", "postgres", "1230", {
@@ -9,34 +8,28 @@ const sequelize = new Sequelize("elastic", "postgres", "1230", {
   // logging: (msg) => logger.debug(msg),
 });
 
-// console.log("sequelize", sequelize);
+// Assuming your synchronization function returns a promise
+async function synchronizeModels() {
+  try {
+    await sequelize.sync({ alter: true });
+    // console.log("Database synchronizing connected.");
+  } catch (error) {
+    console.error("Error synchronizing models:", error);
+  }
+}
 
-function connectDB(params) {
-  sequelize
-    .sync({ alter: true })
-    .then(() => {
-      console.log("Database synchronizing Connected.");
-    })
-    .catch((error) => {
-      console.error("Error synchronizing models:", error);
-    });
+async function connectDB() {
+  try {
+    await sequelize.authenticate();
+    console.log("Database connected.");
+    await synchronizeModels(); // Ensure synchronization is awaited
+  } catch (error) {
+    console.error("Error connecting to database:", error);
+  }
 }
 
 connectDB();
 
-// Test the connection
-async function testConnection() {
-  try {
-    await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
-  }
-}
-
-testConnection();
-
-// testConnection();
-
 // export default connectDB;m\
-module.exports = sequelize;
+// module.exports = sequelize;
+export default sequelize;

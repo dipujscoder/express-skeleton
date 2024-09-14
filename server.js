@@ -1,24 +1,24 @@
+require("dotenv").config();
 import express from "express";
+import cors from "cors";
 
 import UserRouter from "./routers/user.router";
-import cors from "cors";
-// import connectDB from "./config";
-// import { Sequelize } from "sequelize";
-// connectDB();
 
 const app = express();
-const port = 1122;
-
-// export const sequelize = new Sequelize("elastic", "postgres", "1230", {
-//   host: "localhost",
-//   dialect: "postgres",
-// });
+const port = process.env.PORT || 1122;
 
 app.use(cors());
-app.use("/", UserRouter);
+app.use("/api/v1", UserRouter);
 
-app.listen(port, () => {
-  console.log(`you server is running wiht ${port}`);
-});
+if (require.main === module) {
+  // Start the server only if this script is the main module
+  app.listen(port, () => {
+    console.log(`Server is running with ${port}`);
+  });
+}
+
+// app.listen(port, () => {
+//   console.log(`Server is running with ${port}`);
+// });
 
 export default app;

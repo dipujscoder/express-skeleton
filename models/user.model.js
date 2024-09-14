@@ -15,11 +15,21 @@ const User = sequelize.define(
     },
   },
   {
-    timestamps: true,
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    indexes: [{ unique: true, fields: ["email"] }],
     tableName: "users",
+    updatedAt: "update_at",
+    createdAt: "created_at",
+    indexes: [
+      // Create a unique index on email
+
+      {
+        unique: true,
+        fields: ["email"],
+      },
+      {
+        name: "full_name",
+        fields: ["firstName", "lastName"],
+      },
+    ],
   }
 );
 
